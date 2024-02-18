@@ -15,22 +15,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBJIFTCCONF_H__
-#define __LIBJIFTCCONF_H__
+#ifndef __LIBJIFTC_H__
+#define __LIBJIFTC_H__
 
-#include <stdlib.h>
-#include <stdio.h>
+#define JIFTC_MAJOR_DOT_MINOR_VERSION "0.1"
 
-#include <string.h>
-
-#if __cplusplus
-#   define JIFTC_API
-#else
-#   define JIFTC_API extern
-#endif
-
-#define JIFTC_INLINE    inline
-#define JIFTC_STATIC    static
-#define JIFTC_UNUSED(u)
-
-#endif /* __LIBJIFTCCONF_H__ */
+#endif /* __LIBJIFTC_H__ */

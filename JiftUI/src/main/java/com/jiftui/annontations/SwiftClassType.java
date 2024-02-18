@@ -15,22 +15,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBJIFTCCONF_H__
-#define __LIBJIFTCCONF_H__
+package com.jiftui.annontations;
 
-#include <stdlib.h>
-#include <stdio.h>
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-#include <string.h>
+@Documented
+@Retention(RetentionPolicy.SOURCE)
+@Target(ElementType.TYPE)
+public @interface SwiftClassType {
 
-#if __cplusplus
-#   define JIFTC_API
-#else
-#   define JIFTC_API extern
-#endif
+    // Available Choices:
+    // Struct
+    // Class
+    // Extension
+    SwiftClassMode value();
 
-#define JIFTC_INLINE    inline
-#define JIFTC_STATIC    static
-#define JIFTC_UNUSED(u)
-
-#endif /* __LIBJIFTCCONF_H__ */
+}
