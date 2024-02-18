@@ -1,4 +1,4 @@
-package com.jiftui.annontations;
+package com.jiftui.annotations;
 
 public enum SwiftParserMode {
     PARSER_IGNORE_TYPE

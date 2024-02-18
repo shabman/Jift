@@ -1,4 +1,4 @@
-package com.jiftui.annontations;
+package com.jiftui.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
-public @interface SwiftParser {
-    SwiftParserMode value();
+@Target(ElementType.CONSTRUCTOR)
+public @interface SwiftConstruct {
+    boolean hideConstructor();
 }

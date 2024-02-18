@@ -15,10 +15,17 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jiftui.annontations;
+package com.jiftui.annotations;
 
-public enum SwiftClassMode {
-    SWIFT_STRUCT_TYPE,
-    SWIFT_CLASS_TYPE,
-    SWIFT_EXTENSION_TYPE;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Documented
+@Retention(RetentionPolicy.SOURCE)
+@Target(ElementType.PARAMETER)
+public @interface SwiftMethodParameterStyle {
+    String value();
 }

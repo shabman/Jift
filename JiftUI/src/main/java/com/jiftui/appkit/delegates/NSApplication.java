@@ -17,9 +17,12 @@
 
 package com.jiftui.appkit.delegates;
 
-import com.jiftui.annontations.SwiftMethodParameterStyle;
+import com.jiftui.annotations.SwiftClassMode;
+import com.jiftui.annotations.SwiftClassType;
+import com.jiftui.annotations.SwiftMethodParameterStyle;
 import com.jiftui.appkit.windowing.Notification;
 
+@SwiftClassType(SwiftClassMode.SWIFT_OBJC_WRAPPER)
 public abstract class NSApplication {
 
     public NSApplication() { }
@@ -43,6 +46,10 @@ public abstract class NSApplication {
     public abstract void applicationDidUpdate               (@SwiftMethodParameterStyle(value = "HiddenLabel") Notification sender);
 
     public abstract void applicationWillTerminate           (@SwiftMethodParameterStyle(value = "HiddenLabel") Notification sender);
+
+    public abstract boolean applicationShouldTerminateAfterLastWindowClosed(@SwiftMethodParameterStyle(value = "HiddenLabel") NSApplication sender);
+
+
 
     // NOTE: Missing DCSP Func and DCOS Func
 }

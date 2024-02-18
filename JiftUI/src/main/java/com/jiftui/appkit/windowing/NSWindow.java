@@ -17,10 +17,10 @@
 
 package com.jiftui.appkit.windowing;
 
-import com.jiftui.annontations.SwiftClassMode;
-import com.jiftui.annontations.SwiftClassType;
-import com.jiftui.annontations.SwiftParser;
-import com.jiftui.annontations.SwiftParserMode;
+import com.jiftui.annotations.SwiftClassMode;
+import com.jiftui.annotations.SwiftClassType;
+import com.jiftui.annotations.SwiftParser;
+import com.jiftui.annotations.SwiftParserMode;
 
 // NOTE: This class has missing API features from the original NSWindow API.
 // NOTE: Future NSWindow changes will be made once JiftUI is more stable
