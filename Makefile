@@ -1,11 +1,12 @@
-STD_VER := -std=c11
+STD_VER := -std=c++11
 BUILD := -o build/jiftc
-INCLUDES := -Iinclude
+INCLUDES := -Isrc
+SRC_FILES := $(filter-out ./src/main.cpp, $(wildcard ./src/*.cpp))
 
 all: build
 
 build: clean
-	gcc $(STD_VER) src/main.c $(BUILD) $(INCLUDES)
+	g++ $(STD_VER) src/main.cpp $(BUILD) $(INCLUDES) $(SRC_FILES)
 
 clean:
 	rm -rf build
