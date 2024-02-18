@@ -1,0 +1,40 @@
+#ifndef __LIB_JIFTUI_TOKENS_H__
+#define __LIB_JIFTUI_TOKENS_H__
+
+// TODO: Add more when needed
+typedef enum jift_tokens {
+    /* Language Specifics */
+    JIFT_TOKEN_KEYWORD,
+    JIFT_TOKEN_CLASS_DECL,
+    JIFT_TOKEN_METHOD_DECL,
+    JIFT_TOKEN_VARIABLE_DECL,
+
+    /* String related */
+    JIFT_TOKEN_WHITESPACE,
+    JIFT_TOKEN_TABSPACE,
+
+    /* Data Types */
+    JIFT_TOKEN_NON_PRIMITIVE_TYPE,
+    JIFT_TOKEN_EXTERNAL_TYPE,
+
+    /* Modules and Packages */
+    JIFT_TOKEN_MODULE,
+    JIFT_TOKEN_PACKAGE,
+    JIFT_TOKEN_PACKAGE_NAME,
+
+    /* Syntax Behaviour */
+    JIFT_TOKEN_OPEN_PAREN,
+    JIFT_TOKEN_CLOSE_PAREN,
+
+    JIFT_TOKEN_OPEN_BRACE,
+    JIFT_TOKEN_CLOSE_BRACE,
+
+    JIFT_TOKEN_COMMENT_DEFAULT,
+    JIFT_TOKEN_COMMENT_DOCUMENT,
+    JIFT_TOKEN_COMMENT_MULTILINE,
+
+    JIFT_TOKEN_INVALID_SYNTAX
+
+} jift_tokens_t;
+
+#endif /* __LIB_JIFTUI_TOKENS_H__ */

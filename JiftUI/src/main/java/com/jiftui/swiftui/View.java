@@ -22,6 +22,8 @@ import com.jiftui.annotations.SwiftClassType;
 import com.jiftui.annotations.SwiftConstruct;
 import com.jiftui.annotations.SwiftVersionSupport;
 
+import com.jiftui.swiftui.annotations.ViewAttributeMode;
+import com.jiftui.swiftui.annotations.ViewAttributeType;
 import com.jiftui.swiftui.annotations.ViewBuilder;
 import com.jiftui.swiftui.annotations.ViewFuncCallback;
 
@@ -38,6 +40,10 @@ public class View {
     @SwiftConstruct(hideConstructor = true)
     public View() { }
 
+    /* Callback Functions */
+    @ViewAttributeType(value = ViewAttributeMode.SWIFTUI_ATTRIBUTE_FUNCTION)
     public native View task(ViewFuncCallback onAction);
+
+    @ViewAttributeType(value = ViewAttributeMode.SWIFTUI_ATTRIBUTE_FUNCTION)
     public native View onAppear(ViewFuncCallback onAction);
 }
