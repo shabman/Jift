@@ -5,7 +5,7 @@ using namespace Jift;
 
 int main(int argc, char* argv[]) {
         std::string javaSourceCode = 
-        "package;; cc.com;"
+        "package me.bob;"
         "public class Test {" 
             "public static void main(String[] args) {"
                 "System.out.println('Hello world!');"

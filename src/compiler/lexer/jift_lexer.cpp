@@ -21,31 +21,44 @@ const bool Compiler::Lexer::validate_package() noexcept(false) {
     become invisible and should produce an error for
     accessing an invisible file. That is if the java file
     is not a module obviously... */
-    bool valid_package = false;
-    int startIndex = 0;
-    int stopIndex = 7;
-    std::string package_keyword = "package";
+
+    // new idea: append each character a token and bind it to a hashmap to compare it to keywords
 
     JIFT_LEXER_TOOLS(this->m_SourceCode)
-    do {
-        if (this->m_SourceCode.substr(startIndex, stopIndex) == package_keyword) {
-            this->m_IsInvisible = false;
+    std::string pkw = "package";
+    std::string tok_source;
+    std::string pkw_name;
+    char ch;
+
+    bool has_package_kw     = false;
+    bool has_package_name   = false;
+
+    while ((ch = this->m_SourceCode[cursor]) != JIFT_EOS) {
+        tok_source += ch;
+        // std::cout << "TOK: " << tok_source << std::endl;
+        // std::cout << "CH: " << ch << std::endl;
+        if (tok_source == pkw) { 
+            has_package_kw = true;
             this->m_Tokens.push_back(JIFT_TOKEN_PACKAGE);
         }
-        if (!this->m_IsInvisible) {
-            const char next_advance = this->m_SourceCode[stopIndex];
-            if (next_advance == '\n' || next_advance == ';') {
-                valid_package = false;
-                this->m_Tokens.push_back(JIFT_TOKEN_INVALID_SYNTAX);
-                break;
+        if (has_package_kw) {
+            if (isspace(ch)) {
+                while (!(ch == '.')) {
+                    std::cout << ch << std::endl;
+                    if (isalpha(ch)) continue;
+                    if (ch == '.') {
+                        this->m_Tokens.push_back(JIFT_TOKEN_PACKAGE_NAME_SEP);
+                        break;
+                    };
+                }
             } else {
-                valid_package = true;
-                std::cout << "Package is OK\n";
+                std::cout << pkw_name <<std::endl;
             }
         }
         cursor++;
-    } while (cursor < sourceLen);
-    return valid_package;
+    }
+
+    return true;
 }
 
 const bool Compiler::Lexer::validiate_file_class() noexcept(false) {

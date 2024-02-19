@@ -20,6 +20,7 @@ typedef enum jift_tokens {
     /* Modules and Packages */
     JIFT_TOKEN_MODULE,
     JIFT_TOKEN_PACKAGE,
+    JIFT_TOKEN_PACKAGE_NAME_SEP,
     JIFT_TOKEN_PACKAGE_NAME,
 
     /* Syntax Behaviour */
