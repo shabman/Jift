@@ -40,20 +40,7 @@ const bool Compiler::Lexer::validate_package() noexcept(false) {
         if (tok_source == pkw) { 
             has_package_kw = true;
             this->m_Tokens.push_back(JIFT_TOKEN_PACKAGE);
-        }
-        if (has_package_kw) {
-            if (isspace(ch)) {
-                while (!(ch == '.')) {
-                    std::cout << ch << std::endl;
-                    if (isalpha(ch)) continue;
-                    if (ch == '.') {
-                        this->m_Tokens.push_back(JIFT_TOKEN_PACKAGE_NAME_SEP);
-                        break;
-                    };
-                }
-            } else {
-                std::cout << pkw_name <<std::endl;
-            }
+            this->m_CharToken[JIFT_TOKEN_PACKAGE] = tok_source;
         }
         cursor++;
     }
@@ -63,4 +50,12 @@ const bool Compiler::Lexer::validate_package() noexcept(false) {
 
 const bool Compiler::Lexer::validiate_file_class() noexcept(false) {
 return false;
+}
+
+const std::vector<jift_tokens_t> Compiler::Lexer::getTokens() const noexcept {
+    return this->m_Tokens;
+}
+
+const std::unordered_map<jift_tokens_t, std::string> Compiler::Lexer::getMappedTokens() const noexcept {
+    return this->m_CharToken;
 }

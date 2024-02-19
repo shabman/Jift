@@ -3,6 +3,11 @@
 
 using namespace Jift;
 
+template<typename Enumeration>
+auto etoi(Enumeration const value) -> typename std::underlying_type<Enumeration>::type {
+    return static_cast<typename std::underlying_type<Enumeration>::type>(value);
+}
+
 int main(int argc, char* argv[]) {
         std::string javaSourceCode = 
         "package me.bob;"
@@ -16,6 +21,13 @@ int main(int argc, char* argv[]) {
     bool result = lexer.validate_package();
     if (!result) {
         std::cout << "jift.lang.InvalidPackageException:\n\tPackage identifier was invalid\n";
+    }
+
+    for (const auto& tokVal : lexer.getTokens()) {
+        std::cout << etoi(tokVal) << std::endl;
+    }
+    for (const std::pair<jift_tokens_t, std::string>& pair : lexer.getMappedTokens()) {
+        std::cout << pair.second << std::endl;
     }
 }
 
