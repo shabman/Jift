@@ -1,9 +1,10 @@
 #include "jift_util.hpp"
-#include <boost/log/trivial.hpp>
+
+#include "lexer/package/jift_test_package.h"
 
 int main(int argc, char* argv[]) {
-    JIFT_LOG("Starting Compiler Tests with 0 failed tasks...", "")
-    JIFT_LOG("Jift Compiler Testing", "")
+    
+    JiftLogger::log(VERBOSE, "[Jift Compiler Tests]: Starting Tests...\n", true);
 
-    BOOST_LOG_TRIVIAL(trace) << "A trace severity message";
+    __jift_test_package();
 }
