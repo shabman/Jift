@@ -1,6 +1,7 @@
 .vscode
 build
 .DS_Store
+.idea
 
 JiftUI/.idea
 JiftUI/target
