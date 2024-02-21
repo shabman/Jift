@@ -10,7 +10,7 @@ auto etoi(Enumeration const value) -> typename std::underlying_type<Enumeration>
 
 int main(int argc, char* argv[]) {
     std::string javaSourceCode = 
-        "package me.bob;"
+        "package;"
         "//Test Comment"
         "public class Test {" 
             "public static void main(String[] args) {"

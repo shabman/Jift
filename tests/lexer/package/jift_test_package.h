@@ -2,34 +2,32 @@
 
 #include "compiler/lexer/jift_lexer.hpp"
 #include "log/jift_log.hpp"
-#include <vector>
+#include "jift_assert.h"
+
+#include <map>
 #include <iostream>
 
 void __jift_test_package() {
     Jift::Compiler::Lexer lexer;
-    std::vector<std::string> packages = {
-        "package com.test;",
-        "package",
-        "package;",
-        "package com",
-        "packagecom",
-        "package com.",
-        "package .com",
-        "package.com",
-        "package com.test"
+
+    std::unordered_map<std::string, bool> packages = {
+        {"package com.test;",   false},
+        {"package",             true},
+        {"package;",            true},
+        {"package com",         true},
+        {"packagecom",          true},
+        {"package com.",        true},
+        {"package .com",        true},
+        {"package.com",         true},
+        {"package com.test",    true},
+        {"package com.;",       true}
     };
 
-    JiftLogger::log(INFO, "Testing Jift Lexer Packages", true);
-
-    for (const std::string& package : packages) {
-        lexer.set_source(package);
+    for (const std::pair<std::string, bool>& package : packages) {
+        lexer.set_source(package.first);
         bool result = lexer.validate_package();
-        std::string pkg = package + " ";
-        JiftLogger::log(VERBOSE, pkg, false);
-        if (result) {
-            JiftLogger::log(TEST_OK, "Test Pass: Package OK", true);
-        } else {
-            JiftLogger::log(FATAL, "Test Fail: Package NOT OK", true);
-        }
+        std::string pkg = package.first + " ";
+
+        jift_assert((package.second != result), pkg, ": TEST PASSED");
     }
 }

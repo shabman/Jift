@@ -82,15 +82,12 @@ const bool Compiler::Lexer::validate_package() noexcept(false) {
             this->m_CharToken[JIFT_TOKEN_PACKAGE] = tok_source;
         }
         if (has_package_kw) {
-            // Breaks the entire thing bruh
-            if (ch == ';') {
-                this->m_Tokens.push_back(JIFT_TOKEN_TERMINATOR);
-                break;
-            }
             if (ch == '.') {
                 this->m_Tokens.push_back(JIFT_TOKEN_PACKAGE_NAME_SEP);
             } else {
                 if (ch == ';') {
+                    if (tok_source[cursor - 1] == '.') break;
+                    if (tok_source.substr(0, cursor) == "package") break;
                     has_package_name = true;
                     this->m_Tokens.push_back(JIFT_TOKEN_TERMINATOR);
                     break; // Finished analysing the package

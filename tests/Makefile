@@ -1,5 +1,5 @@
 STD_VER := -std=c++11
-INCLUDES := -I../include
+INCLUDES := -I../include -I../tests
 
 COMPILED_SOURCES = ../src/compiler/lexer/*.cpp
 
