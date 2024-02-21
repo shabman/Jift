@@ -41,13 +41,41 @@ const std::tuple<Compiler::CommentType, bool> Compiler::Lexer::has_comment_ident
     return std::make_tuple(Compiler::CommentType::COMMENT_UNKNOWN, false);
 }
 
-const bool Compiler::Lexer::has_comment_ended(char& ch) noexcept {
+const bool Compiler::Lexer::has_comment_ended() noexcept {
     // TODO: Implement me!
-    return false;
+    // ok let's go
+    int c = 0;
+    char aster_term = '*';
+    char terminator = '/';
+    std::tuple<Compiler::CommentType, bool> has_comment;
+
+    bool found_terminator = false;
+
+    while (this->m_SourceCode[c] != '\0') {
+        has_comment = this->has_comment_identifier(this->m_SourceCode, c);
+        if (JIFT_UNPACK(has_comment, 1)) {
+            if (this->m_SourceCode[c] == aster_term) {
+                while (this->m_SourceCode[c] == aster_term) {
+                    if (this->m_SourceCode[c] == terminator) {
+                        found_terminator = true;
+                        break;
+                    }
+                    c++;
+                }
+            } 
+        }
+        c++;
+    }
+
+    return found_terminator;
 }
 
 const bool Compiler::Lexer::parse_source() noexcept(false) {
-    return false;
+    return (
+        this->validate_package() &&
+        this->validate_imports() &&
+        this->validate_file_class()
+    );
 }
 
 const bool Compiler::Lexer::validate_package() noexcept(false) {
@@ -116,8 +144,26 @@ const bool Compiler::Lexer::validate_package() noexcept(false) {
     return (has_package_kw && has_package_name);
 }
 
-const bool Compiler::Lexer::validiate_file_class() noexcept(false) {
-return false;
+const bool Compiler::Lexer::validate_imports() noexcept(false) {
+    JIFT_LEXER_TOOLS(this->m_SourceCode);
+
+    const std::string imprt_kw = "import";
+    const std::string accepts = "static";
+
+    char ch;
+
+    while ((ch = this->m_SourceCode[cursor]) != JIFT_EOS) {
+        if (JIFT_UNPACK(this->has_comment_identifier(this->m_SourceCode, cursor), 1)) {
+            cursor++;
+            continue;
+        }
+    }
+
+    return false;
+}
+
+const bool Compiler::Lexer::validate_file_class() noexcept(false) {
+    return false;
 }
 
 const std::vector<jift_tokens_t> Compiler::Lexer::getTokens() const noexcept {

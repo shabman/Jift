@@ -7,7 +7,7 @@ all: build
 
 build: clean
 	mkdir bin
-	g++ $(STD_VER) jift_test.cpp -o bin/jtests $(INCLUDES) $(COMPILED_SOURCES)
+	g++ $(STD_VER) jift_test.cpp -o bin/jtests $(INCLUDES) $(COMPILED_SOURCES) -D__JIFT_DEBUG_TEST__
 
 clean:
 	rm -rf bin

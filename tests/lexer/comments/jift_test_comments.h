@@ -28,31 +28,27 @@
 #define SHOULD_FAIL true
 #define SHOULD_PASS false
 
-void __jift_test_package() {
+#ifndef __JIFT_DEBUG_TEST__
+#   error Please define __JIFT_DEBUG_TEST__ before testing any Compiler Behaviour
+#endif
+
+void __jift_test_comments() {
     Jift::Compiler::Lexer lexer;
 
     /* WILL PASS = FALSE, WILL FAIL = TRUE */
-    std::unordered_map<std::string, bool> packages = {
-        {"package com.test;",                       SHOULD_PASS},
-        {"package",                                 SHOULD_FAIL},
-        {"package !!;",                             SHOULD_PASS}, // Will be corrected after the lexer phase...forgive me
-        {"package;",                                SHOULD_FAIL},
-        {"package com",                             SHOULD_FAIL},
-        {"packagecom",                              SHOULD_FAIL},
-        {"package com.",                            SHOULD_FAIL},
-        {"package .com",                            SHOULD_FAIL},
-        {"package.com",                             SHOULD_FAIL},
-        {"package com.test",                        SHOULD_FAIL},
-        {"package com.;",                           SHOULD_FAIL},
-        {"package 123;",                            SHOULD_FAIL},
-        {"package hello.123;",                      SHOULD_FAIL},
-        {"package 123.test;",                       SHOULD_FAIL},
-        {"package a123.te3st;",                     SHOULD_PASS},
-        {"package a.3te3st;",                       SHOULD_FAIL},
-        {"package me     .      malik        ;",    SHOULD_PASS},
+    std::unordered_map<std::string, bool> start_comments = {
+        {"//",  SHOULD_PASS},
+        {"/*",  SHOULD_PASS},
+        {"/**", SHOULD_PASS},
     };
 
-    for (const std::pair<std::string, bool>& package : packages) {
+    std::unordered_map<std::string, bool> end_comments = {
+        {"*/",          SHOULD_PASS},
+        {"****/",       SHOULD_PASS},
+        {"*******/",    SHOULD_PASS},
+    };
+
+    for (const std::pair<std::string, bool>& package : start_comments) {
 
         JIFT_SLEEP_MS(150);
 

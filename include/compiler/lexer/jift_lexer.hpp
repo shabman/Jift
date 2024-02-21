@@ -52,17 +52,24 @@ private:
 
     bool m_IsInvisible;
     bool m_CommentStart;
+
+#ifdef __JIFT_DEBUG_TEST__
+public:
+#else
 private:
+#endif
     const std::tuple<CommentType, bool> has_comment_identifier(const std::string&, const int&) noexcept;
-    const bool has_comment_ended(char&) noexcept;
+    const bool has_comment_ended() noexcept;
 public:
     Lexer();
     Lexer(const std::string&);
     ~Lexer();
 public:
     const bool parse_source()           noexcept(false);
+    // TODO: Make them private once implemented
     const bool validate_package()       noexcept(false);
-    const bool validiate_file_class()   noexcept(false);
+    const bool validate_file_class()    noexcept(false);
+    const bool validate_imports()       noexcept(false);
 
     const std::vector<jift_tokens_t> getTokens() const noexcept;
     const std::unordered_map<jift_tokens_t, std::string> getMappedTokens() const noexcept;
