@@ -8,7 +8,8 @@ enum LogLevel {
     VERBOSE,
     INFO,
     FATAL,
-    TEST_OK
+    TEST_OK,
+    ALERT
 };
 
 class JiftLogger final {
@@ -29,6 +30,9 @@ public:
                 break;
             case TEST_OK:
                 printColoredText("\033[1;32m[PASSED] " + message + "\033[0m", end); // Green
+                break;
+            case ALERT:
+                printColoredText("\033[1;34m[ALERT] " + message + "\033[0m", end); // Blue
                 break;
             default:
                 break;

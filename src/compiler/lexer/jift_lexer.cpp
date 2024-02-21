@@ -70,6 +70,13 @@ const bool Compiler::Lexer::validate_package() noexcept(false) {
     bool has_package_kw     = false;
     bool has_package_name   = false;
 
+    /*
+        Current Bugs:
+        Packages starting with numbers are valid (WHICH IS INCORRECT)
+        Packages starting with random symbols are valid (WHICH IS INCORRECT)
+        Package names after the separator starting with digits are valid (WHICH IS INCORRECT)
+     */
+
     while ((ch = this->m_SourceCode[cursor]) != JIFT_EOS) {
         if (JIFT_UNPACK(this->has_comment_identifier(this->m_SourceCode, cursor), 1)) {
             cursor++;
@@ -79,20 +86,26 @@ const bool Compiler::Lexer::validate_package() noexcept(false) {
         if (tok_source == pkw) { 
             has_package_kw = true;
             this->m_Tokens.push_back(JIFT_TOKEN_PACKAGE);
-            this->m_CharToken[JIFT_TOKEN_PACKAGE] = tok_source;
         }
         if (has_package_kw) {
+            if (tok_source.substr(0, cursor) == pkw && std::isdigit(this->m_SourceCode[cursor + 1])) break;
             if (ch == '.') {
+                if (std::isdigit(this->m_SourceCode[cursor + 1])) break;
                 this->m_Tokens.push_back(JIFT_TOKEN_PACKAGE_NAME_SEP);
             } else {
                 if (ch == ';') {
                     if (tok_source[cursor - 1] == '.') break;
-                    if (tok_source.substr(0, cursor) == "package") break;
+                    if (tok_source.substr(0, cursor) == pkw) break;
                     has_package_name = true;
                     this->m_Tokens.push_back(JIFT_TOKEN_TERMINATOR);
                     break; // Finished analysing the package
                 }
                 if (std::isalpha(ch)) this->m_Tokens.push_back(JIFT_TOKEN_CHARACTER);
+                if (std::isdigit(ch)) this->m_Tokens.push_back(JIFT_TOKEN_NUMERICAL);
+                // NOTE: Symbols like "!@#$" etc... will be marked as valid
+                // They will be corrected during the next phase.
+                // This makes it easier to generate tokens for packages
+                if (!std::isdigit(ch) && !std::isalpha(ch)) this->m_Tokens.push_back(JIFT_TOKEN_DIFF_SYMBOL);
             }
         }
         cursor++;

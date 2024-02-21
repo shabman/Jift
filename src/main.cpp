@@ -19,6 +19,12 @@ int main(int argc, char* argv[]) {
             "}" 
         "}";
 
+    /*
+    char v = '!';
+    std::cout << (std::isdigit(v)) << std::endl;
+    std::cout << (std::isalpha(v)) << std::endl;
+    */
+
     Compiler::Lexer lexer(javaSourceCode);
     bool result = lexer.validate_package();
     if (!result) {
@@ -30,6 +36,15 @@ int main(int argc, char* argv[]) {
     }
     for (const std::pair<jift_tokens_t, std::string>& pair : lexer.getMappedTokens()) {
         std::cout << pair.second << std::endl;
+    }
+
+    try {
+        std::string test = "eee";
+        std::string::size_type sz;
+        std::cout << std::stoi(test, &sz) << std::endl;
+    } catch(std::exception& e) {
+        std::cout << e.what() << std::endl;
+        std::cout << "fail\n";
     }
 }
 

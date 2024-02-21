@@ -52,8 +52,10 @@ typedef enum jift_tokens {
     JIFT_TOKEN_COMMENT_DOCUMENT,
     JIFT_TOKEN_COMMENT_MULTILINE,
 
-    /* Strings */
+    /* Character Symbols */
     JIFT_TOKEN_CHARACTER,
+    JIFT_TOKEN_NUMERICAL,
+    JIFT_TOKEN_DIFF_SYMBOL,
 
     JIFT_TOKEN_INVALID_SYNTAX
 

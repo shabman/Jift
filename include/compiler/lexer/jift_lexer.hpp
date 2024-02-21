@@ -26,6 +26,8 @@
 
 #define JIFT_EOS '\0'
 #define JIFT_UNPACK(t, i) std::get<i>(t)
+#define JIFT_LONG_REGEX "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_.;" // dont use
+#define JIFT_COMMON_MAL_SYMBOLS "±!@#$%^&*()+=]}[{|'\":/?><~`"
 
 #define JIFT_LEXER_TOOLS(source) \
     int sourceLen = source.length(); \
